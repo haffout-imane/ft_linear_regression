@@ -15,13 +15,9 @@ Metrics computed (all on the 24 training points — no train/test split):
 import math
 
 from dataset import load_dataset
-from hypothesis import estimate_price
+from gradient_descent import estimate_price
 from thetas_io import load_thetas
 
-
-# ---------------------------------------------------------------------------
-# Metric functions — plain Python loops, no library fits the model here
-# ---------------------------------------------------------------------------
 
 def mean_absolute_error(mileages, prices, theta0, theta1):
     """
@@ -84,16 +80,14 @@ def r_squared(mileages, prices, theta0, theta1):
     return 1 - ss_res / ss_tot
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
 def main():
-    mileages, prices, m = load_dataset()
     theta0, theta1 = load_thetas()
 
     if theta0 == 0.0 and theta1 == 0.0:
-        print("WARNING: thetas are 0 -- run 'python train.py' first.\n")
+        print("WARNING: thetas are 0 -- run 'python train.py' first.")
+        return
+
+    mileages, prices, m = load_dataset()
 
     print(f"theta0 = {theta0:.6f}")
     print(f"theta1 = {theta1:.6f}")

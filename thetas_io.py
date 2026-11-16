@@ -8,7 +8,6 @@ DEFAULT_THETAS = Path(__file__).resolve().parent / "thetas.json"
 
 
 def save_thetas(theta0, theta1, path=DEFAULT_THETAS):
-    """Write the two parameters so predict.py can load them later."""
     path = Path(path)
     payload = {"theta0": float(theta0), "theta1": float(theta1)}
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
@@ -16,12 +15,6 @@ def save_thetas(theta0, theta1, path=DEFAULT_THETAS):
 
 
 def load_thetas(path=DEFAULT_THETAS):
-    """
-    Return (theta0, theta1).
-
-    If the file does not exist, training never ran: the subject says both are 0.
-    If the file exists but is invalid, raise — that is not the untrained case.
-    """
     path = Path(path)
     if not path.is_file():
         return 0.0, 0.0

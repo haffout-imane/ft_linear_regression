@@ -1,12 +1,11 @@
 """Prompt for a mileage and print the estimated price using saved thetas."""
 
 from dataset import load_dataset
-from hypothesis import estimate_price
+from gradient_descent import estimate_price
 from thetas_io import load_thetas
 
 
 def read_mileage():
-    """Ask until the user types a number. Mileage is km, so we expect a float."""
     while True:
         raw = input("Mileage (km): ").strip()
         if raw == "":
@@ -19,7 +18,6 @@ def read_mileage():
 
 
 def warn_if_unreliable(mileage, price):
-    """Explain when a prediction is outside the data's useful range."""
     if mileage < 0:
         print("Warning: negative mileage is not physically valid.")
 
@@ -30,7 +28,7 @@ def warn_if_unreliable(mileage, price):
 
     if mileages and not min(mileages) <= mileage <= max(mileages):
         print(
-            f"Warning: {mileage:g} km is outside the training range "
+            f"Warning: the entered mileage is outside the training range "
             f"({min(mileages):g}–{max(mileages):g} km). "
             "This is extrapolation, so the estimate may be unreliable."
         )

@@ -1,12 +1,7 @@
 # ft_linear_regression
 
-A from-scratch implementation of **simple linear regression** trained with **batch gradient descent**, built for the 42 school project.
 
-No `sklearn`, no `numpy.polyfit`, no closed-form solver — only the update rule from the subject PDF.
-
----
-
-## How it works (one paragraph)
+## How it works
 
 We assume car price is a linear function of mileage: `price ≈ θ0 + θ1 × mileage`.  
 We measure how wrong a candidate line is with **mean squared error** `J`.  
@@ -23,10 +18,9 @@ ft_linear_regression/
 ├── data/
 │   └── data.csv          # 24 cars: km, price (given, not modified)
 ├── dataset.py            # load_dataset → mileages, prices, m
-├── hypothesis.py         # estimate_price(mileage, theta0, theta1)
 ├── thetas_io.py          # save_thetas / load_thetas  (thetas.json ↔ disk)
 ├── scaling.py            # min-max scale mileage; denormalize θ back to raw km
-├── gradient_descent.py   # cost J, compute_tmps, gradient_step, fit_linear_regression
+├── gradient_descent.py   # cost J, compute_tmps, gradient_step, fit_linear_regression, estimate_price(mileage, theta0, theta1)
 ├── train.py              # mandatory program 2: load → fit → save
 ├── predict.py            # mandatory program 1: load θ → prompt → estimate
 ├── plot.py               # bonus: scatter + regression line
@@ -127,10 +121,9 @@ R²   : 0.7330  (line explains 73 % of price variance)
 | File | Role | Has math? |
 |------|------|-----------|
 | `dataset.py` | Parse CSV → parallel lists | No |
-| `hypothesis.py` | `θ0 + θ1 × km` | The formula |
 | `thetas_io.py` | JSON read/write for θ | No |
 | `scaling.py` | Min-max scale; denormalize θ | Algebra |
-| `gradient_descent.py` | Cost J, tmp sums, GD loop | Core ML |
+| `gradient_descent.py` | Cost J, estimate_price, tmp sums, GD loop | Core ML |
 | `train.py` | Orchestrate train → save | No |
 | `predict.py` | Orchestrate load → ask → print | No |
 | `plot.py` | matplotlib scatter + line | No |
@@ -174,9 +167,3 @@ Denormalize back to raw km:
     θ1 = θ1' / span
     θ0 = θ0' - θ1' × xmin / span
 ```
-
----
-
-## AI use
-
-This project was built step by step with AI assistance (Antigravity / Gemini) for explanations, code review, and catching edge cases. Every technical decision — choice of α, min-max vs z-score, the file layout, whether to clamp negative prices — was discussed and understood before implementation. The math (gradient descent formulas, denormalization algebra) was verified by hand against Part A of `LEARNING.md` before being coded.

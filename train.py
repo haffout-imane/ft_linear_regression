@@ -43,14 +43,12 @@ def parse_args():
 def main():
     args = parse_args()
 
-    # --- Step 1: Load the dataset (experience E) ---
     print("Loading dataset...")
     mileages, prices, m = load_dataset()
     print(f"  m = {m} examples")
     print(f"  mileage range: {min(mileages):.0f} km - {max(mileages):.0f} km")
     print(f"  price range:   {min(prices):.0f} - {max(prices):.0f}")
 
-    # --- Step 2: Run batch GD with min-max scaling ---
     print(f"\nTraining: alpha={args.lr}, iterations={args.iters}")
     print(f"J before training: {cost_j(mileages, prices, 0.0, 0.0):.2f}")
     theta0, theta1 = fit_linear_regression(
@@ -60,7 +58,10 @@ def main():
         n_iterations=args.iters,
     )
 
-    # --- Step 3: Report trained thetas ---
+
+
+
+
     print(f"\nConverged thetas (raw km):")
     print(f"  theta0 = {theta0:.6f}")
     print(f"  theta1 = {theta1:.6f}")
@@ -69,7 +70,6 @@ def main():
     else:
         print("  theta1 is negative (more km = lower price).")
 
-    # --- Step 4: Save to disk ---
     path = save_thetas(theta0, theta1)
     print(f"\nThetas saved to: {path}")
     print("Run 'python predict.py' to estimate a price.")

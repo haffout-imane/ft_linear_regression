@@ -1,7 +1,10 @@
 """Batch gradient descent pieces from the subject: cost J, tmp thetas, one update."""
 
-from hypothesis import estimate_price
 from scaling import denormalize_thetas, min_max_bounds, scale_to_unit_interval
+
+
+def estimate_price(mileage, theta0, theta1):
+    return theta0 + theta1 * mileage
 
 
 def cost_j(mileages, prices, theta0, theta1):
@@ -19,10 +22,10 @@ def cost_j(mileages, prices, theta0, theta1):
 
 def compute_tmps(mileages, prices, theta0, theta1, learning_rate):
     """
-    Subject formulas (tmp is alpha times the gradient, NOT the new theta):
+    Subject formulas:
 
-    tmpθ0 = α * (1/m) * Σ (estimatePrice(mileage[i]) - price[i])
-    tmpθ1 = α * (1/m) * Σ (estimatePrice(mileage[i]) - price[i]) * mileage[i]
+    tmpθ0 = alpha * (1/m) * Σ (estimatePrice(mileage[i]) - price[i])
+    tmpθ1 = alpha * (1/m) * Σ (estimatePrice(mileage[i]) - price[i]) * mileage[i]
 
     Both sums use the SAME current theta0 and theta1 (simultaneous).
     """
@@ -39,7 +42,6 @@ def compute_tmps(mileages, prices, theta0, theta1, learning_rate):
 
 
 def gradient_step(mileages, prices, theta0, theta1, learning_rate):
-    """One batch update: theta := theta - tmp, both components at once."""
     tmp0, tmp1 = compute_tmps(mileages, prices, theta0, theta1, learning_rate)
     return theta0 - tmp0, theta1 - tmp1
 
@@ -51,12 +53,6 @@ def fit_linear_regression(
     n_iterations=10000,
     log_every=1000,
 ):
-    """
-    Batch GD on mileage scaled to [0, 1]. Returns thetas for RAW mileage.
-
-    During the loop, theta0/theta1 are in scaled space (x' in [0, 1]).
-    After the loop we denormalize so estimate_price(raw_km, θ0, θ1) is valid.
-    """
     xmin, xmax = min_max_bounds(mileages)
     scaled = scale_to_unit_interval(mileages, xmin, xmax)
 

@@ -14,12 +14,11 @@ What it shows:
 import matplotlib.pyplot as plt
 
 from dataset import load_dataset
-from hypothesis import estimate_price
-from thetas_io import load_thetas
+from gradient_descent import estimate_price
+from thetas_io import DEFAULT_THETAS, load_thetas
 
 
 def plot_regression(mileages, prices, theta0, theta1):
-    """Draw scatter + line + optional prediction marker."""
 
     fig, ax = plt.subplots(figsize=(9, 5))
     fig.patch.set_facecolor("#0f1117")
@@ -85,11 +84,15 @@ def plot_regression(mileages, prices, theta0, theta1):
 
 
 def main():
+    if not DEFAULT_THETAS.is_file():
+        print(
+            "WARNING: thetas.json does not exist. Train the model first "
+            "with 'make train', then run 'make plot'."
+        )
+        return
+
     mileages, prices, m = load_dataset()
     theta0, theta1 = load_thetas()
-
-    if theta0 == 0.0 and theta1 == 0.0:
-        print("WARNING: thetas are 0. Run 'python train.py' first.")
 
     print(f"theta0 = {theta0:.6f}")
     print(f"theta1 = {theta1:.6f}")
