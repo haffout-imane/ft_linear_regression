@@ -34,8 +34,8 @@ def parse_args():
     parser.add_argument(
         "--iters",
         type=int,
-        default=10000,
-        help="Number of gradient descent iterations. Default: 10000",
+        default=1000,
+        help="Number of gradient descent iterations. Default: 1000",
     )
     return parser.parse_args()
 

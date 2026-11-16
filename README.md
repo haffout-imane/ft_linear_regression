@@ -67,7 +67,7 @@ python train.py --lr 0.1 --iters 5000
 | Flag | Default | Meaning |
 |------|---------|---------|
 | `--lr` | `0.1` | Learning rate (α) |
-| `--iters` | `10000` | Number of GD iterations |
+| `--iters` | `1000` | Number of GD iterations |
 
 Expected output (values may differ slightly):
 

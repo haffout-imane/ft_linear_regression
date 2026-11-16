@@ -50,8 +50,8 @@ def fit_linear_regression(
     mileages,
     prices,
     learning_rate=0.1,
-    n_iterations=10000,
-    log_every=1000,
+    n_iterations=1000,
+    log_every=100,
 ):
     xmin, xmax = min_max_bounds(mileages)
     scaled = scale_to_unit_interval(mileages, xmin, xmax)
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     print("J after: ", cost_j(mileages, prices, raw0, raw1))
     print("If J went up and theta1 is huge, that is why we scale mileage.")
 
-    print("\n=== data.csv, 10000 steps, mileage scaled to [0, 1] ===")
+    print("\n=== data.csv, 1000 steps, mileage scaled to [0, 1] ===")
     theta0, theta1 = fit_linear_regression(mileages, prices)
     print("theta0 (raw):", theta0)
     print("theta1 (raw):", theta1)
