@@ -62,7 +62,7 @@ pip install -r requirements.txt
 python train.py
 ```
 
-Runs 10 000 iterations of batch gradient descent with `α = 0.5` and saves `thetas.json`.
+Runs 10 000 iterations of batch gradient descent with `α = 0.1` and saves `thetas.json`.
 
 Optional flags:
 
@@ -72,7 +72,7 @@ python train.py --lr 0.1 --iters 5000
 
 | Flag | Default | Meaning |
 |------|---------|---------|
-| `--lr` | `0.5` | Learning rate (α) |
+| `--lr` | `0.1` | Learning rate (α) |
 | `--iters` | `10000` | Number of GD iterations |
 
 Expected output (values may differ slightly):

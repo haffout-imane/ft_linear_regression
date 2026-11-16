@@ -8,8 +8,6 @@ def cost_j(mileages, prices, theta0, theta1):
     """
     J(theta0, theta1) = (1 / (2m)) * sum (estimate - price)^2
 
-    The 1/2 is conventional so the derivative matches the PDF sums.
-    GD still works if you drop the 1/2; the minimum is the same θ.
     """
     m = len(mileages)
     total = 0.0
@@ -49,7 +47,7 @@ def gradient_step(mileages, prices, theta0, theta1, learning_rate):
 def fit_linear_regression(
     mileages,
     prices,
-    learning_rate=0.5,
+    learning_rate=0.1,
     n_iterations=10000,
     log_every=1000,
 ):

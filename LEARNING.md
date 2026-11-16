@@ -1112,7 +1112,7 @@ You still see the **toy** (step 4) and the **exploding** one-step on raw km. The
 - `theta1` **negative**
 - estimate at 50 000 km **higher** than at 200 000 km
 
-Default hyperparameters (you choose them; they are not in the PDF): `learning_rate=0.5`, `n_iterations=10000`.
+Default hyperparameters (you choose them; they are not in the PDF): `learning_rate=0.1`, `n_iterations=10000`.
 
 ---
 
@@ -1241,7 +1241,7 @@ Thetas saved to: .../thetas.json
 **`parse_args()`**
 
 ```text
---lr    float   default 0.5   learning rate (α)
+--lr    float   default 0.1   learning rate (α)
 --iters int     default 10000 number of GD iterations
 ```
 
@@ -1622,7 +1622,7 @@ This project was built step by step with AI assistance (Antigravity / Gemini) fo
 Technical decisions made **by the student** (not delegated to AI):
 
 - Choice of **min-max** scaling over z-score (simpler algebra for denormalization, easier to explain at defense).
-- Default `α = 0.5`, `n_iterations = 10 000` (chosen by watching J flatten, not by a formula).
+- Default `α = 0.1`, `n_iterations = 10 000` (chosen by watching J flatten, not by a formula).
 - **Not** clamping negative prices (the linear model is unbounded; we disclose this at defense rather than hiding it).
 - File layout: one function per concept, no copy-pasted formulas across files.
 - **Plain Python loops** for all sums instead of numpy, to match the PDF's Σ notation exactly.

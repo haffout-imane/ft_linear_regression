@@ -2,7 +2,6 @@
 
 
 def min_max_bounds(mileages):
-    """xmin and xmax of the training mileages. Span must not be 0."""
     xmin = min(mileages)
     xmax = max(mileages)
     if xmax == xmin:

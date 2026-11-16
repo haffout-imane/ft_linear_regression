@@ -28,8 +28,8 @@ def parse_args():
     parser.add_argument(
         "--lr",
         type=float,
-        default=0.5,
-        help="Learning rate (alpha). Default: 0.5",
+        default=0.1,
+        help="Learning rate (alpha). Default: 0.1",
     )
     parser.add_argument(
         "--iters",
@@ -67,7 +67,7 @@ def main():
     if theta1 > 0:
         print("  WARNING: theta1 is positive. Check scaling or learning rate.")
     else:
-        print("  theta1 is negative -- correct (more km = lower price).")
+        print("  theta1 is negative (more km = lower price).")
 
     # --- Step 4: Save to disk ---
     path = save_thetas(theta0, theta1)
